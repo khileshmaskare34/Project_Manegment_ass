@@ -4,14 +4,17 @@ var user = require('./users');
 const { signup, editUser, deleteUser } = require('../Controller/userSchema');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/', async function(req, res, next) {
+  const deprt = await user.find({});
+
+  res.render('index', {deprt});
 });
 
 router.get("/register", async (req, res)=>{
   const deprt = await user.find({});
-  console.log(deprt);
+  // console.log(deprt);
   res.render('register.ejs', {deprt})
+  // res.json(deprt);
 })
 
 router.post('/register',signup)
